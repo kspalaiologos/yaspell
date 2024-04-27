@@ -65,18 +65,13 @@ struct transform transforms[] = {
 // Apply all permutations of transforms to the word. Check if any matches.
 s8 transform_and_check(dict * d, u8 * word) {
     // First check the word as is.
-    if (dict_find(d, word)) return 1;
+    If (dict_find(d, word), return 1)
     u32 len = strlen(word);
     for (u32 perm = 0b0000; perm < 0b10000; perm++) {
-        u8 buf[128]; memcpy(buf, word, len + 1);
-        void * data[4] = { NULL };
-        for (u32 i = 0; i < 4; i++) {
-            if (perm & (1 << i)) transforms[i].f(buf, len, &data[i]);
-        }
+        u8 buf[128]; memcpy(buf, word, len + 1); void * data[4] = { NULL };
+        Fi(4, If(perm & (1 << i), transforms[i].f(buf, len, &data[i])))
         if (dict_find(d, buf)) return 1;
-        for (u32 i = 0; i < 4; i++) {
-            if (perm & (1 << i)) transforms[i].b(buf, len, &data[i]);
-        }
+        Fi(4, If(perm & (1 << i), transforms[i].b(buf, len, &data[i])))
     }
     return 0;
 }

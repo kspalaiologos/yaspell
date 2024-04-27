@@ -9,6 +9,9 @@
         "variant": "c",
         "text_encoding": "c",
         "iterator": "c",
-        "email.h": "c"
+        "email.h": "c",
+        "common.h": "c",
+        "random": "c",
+        "string.h": "c"
     }
 }
