@@ -10,3 +10,7 @@ Makefile
 yaspell
 
 *.o
+
+autom4te.cache/
+
+configure~
