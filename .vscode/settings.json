@@ -8,6 +8,7 @@
         "system_error": "c",
         "variant": "c",
         "text_encoding": "c",
-        "iterator": "c"
+        "iterator": "c",
+        "email.h": "c"
     }
 }
