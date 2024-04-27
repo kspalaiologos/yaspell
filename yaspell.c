@@ -10,11 +10,11 @@
 #include "dict.h"
 
 int main(int argc, char * argv[]) {
-    if (argc != 2) {
-        fprintf(stderr, "Usage: %s <input file>\n", argv[0]);
+    if (argc != 3) {
+        fprintf(stderr, "Usage: %s <dictionary> <input file>\n", argv[0]);
         return 1;
     }
-    FILE * src = fopen("words", "r");
+    FILE * src = fopen(argv[1], "r");
     assert(src);
     dict * d = dict_create(src);
     assert(d);
@@ -22,7 +22,7 @@ int main(int argc, char * argv[]) {
 
     printf("Dictionary loaded.\n");
 
-    FILE * input = fopen(argv[1], "r");
+    FILE * input = fopen(argv[2], "r");
     assert(input);
 
     u8 word_buf[128];
