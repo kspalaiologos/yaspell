@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "string": "c",
+        "vector": "c",
+        "memory": "c",
+        "optional": "c",
+        "string_view": "c",
+        "system_error": "c",
+        "variant": "c",
+        "text_encoding": "c",
+        "iterator": "c"
+    }
+}

@@ -11,5 +11,9 @@ typedef int8_t s8;
 typedef int16_t s16;
 typedef int32_t s32;
 
+#define Fi(n,a...) for(u32 i=0;i<n;i++){a;}
+#define Fj(n,a...) for(u32 j=n;j>0;j--){a;}
+#define Fx(n,a...) for(u32 x=0;x<n;x++){a;}
+
 #endif
 

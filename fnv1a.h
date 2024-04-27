@@ -11,8 +11,7 @@ static inline u32 fnv1a_char(u8 c, u32 hash) {
 }
 
 static inline u32 fnv1a_bytes(u8 * s, u32 len, u32 hash) {
-    for (u32 i = 0; i < len; i++)
-        hash = (s[i] ^ hash) * 0x01000193U;
+    Fi(len, hash = fnv1a_char(s[i], hash));
     return hash;
 }
 
