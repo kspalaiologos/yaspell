@@ -8,6 +8,7 @@
 #include "common.h"
 #include "email.h"
 #include "dict.h"
+#include "transform.h"
 
 int main(int argc, char * argv[]) {
     if (argc != 3) {
@@ -63,32 +64,8 @@ int main(int argc, char * argv[]) {
                 continue;
             }
             word_buf[len] = '\0';
-            // Is the word (verbatim) in the dictionary?
-            if (dict_find(d, word_buf)) { word = -1; continue; }
-            // Try to correct the word:
-            word_buf[0] ^= 0x20;
-            if (dict_find(d, word_buf)) { word = -1; continue; }
-            // OK, go back.
-            word_buf[0] ^= 0x20;
-            // Check if the word is all-caps:
-            s8 all_caps = 1;
-            for (u32 j = 0; j < len; j++) {
-                if (isalpha(word_buf[j]) && !isupper(word_buf[j])) { all_caps = 0; break; }
-            }
-            if (all_caps) {
-                u8 lower[128];
-                for (u32 j = 0; j < len; j++) {
-                    lower[j] = tolower(word_buf[j]);
-                }
-                lower[len] = '\0';
-                if (dict_find(d, lower)) { word = -1; continue; }
-                // Starts with a capital?
-                word_buf[0] ^= 0x20;
-                if (dict_find(d, word_buf)) { word = -1; continue; }
-                word_buf[0] ^= 0x20;
-            }
-            // More checks here.
-            
+            // Is the word in the dictionary?
+            if (transform_and_check(d, word_buf)) { word = -1; continue; }
             // This can not be saved. Offer completions.
             completion c = dict_myers(d, word_buf);
             if (c.distances[0] + 1 >= len) {
