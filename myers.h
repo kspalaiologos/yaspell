@@ -1,4 +1,7 @@
 
+#ifndef _MYERS_H
+#define _MYERS_H
+
 #include "common.h"
 #include <string.h>
 
@@ -38,3 +41,4 @@ static s32 myers(u8 * t, s32 n, u8 * p, s32 m) {
     return score;
 }
 
+#endif

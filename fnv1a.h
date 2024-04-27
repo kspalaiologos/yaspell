@@ -1,4 +1,7 @@
 
+#ifndef _FNV1A_H
+#define _FNV1A_H
+
 #include "common.h"
 
 static const u32 fnv1a_seed = 0x811C9DC5;
@@ -13,3 +16,4 @@ static inline u32 fnv1a_bytes(u8 * s, u32 len, u32 hash) {
     return hash;
 }
 
+#endif
