@@ -108,7 +108,7 @@ s8 dict_find(dict * d, u8 * word) {
     return 0;
 }
 
-u8 * strdup(const u8 * s) {
+u8 * d_strdup(const u8 * s) {
     u32 len = strlen(s);
     u8 * t = malloc(len + 1);
     if (!t) return NULL;
@@ -149,7 +149,7 @@ completion dict_myers(dict * d, u8 * word) {
         }
         wordptr += strlen(wordptr) + 1;
     }
-    c.word = strdup(word);
+    c.word = d_strdup(word);
     if (vector_size(d->lru) >= LRU_MAX) {
         free(d->lru[0].word);
         vector_erase(d->lru, 0);
