@@ -15,6 +15,7 @@ typedef int32_t s32;
 #define Fj(n,a...) for(u32 j=n;j>0;j--){a;}
 #define Fx(n,a...) for(u32 x=0;x<n;x++){a;}
 #define If(n,a...) if(n){a;}
+#define Else(a...) else{a;}
 
 #endif
 
