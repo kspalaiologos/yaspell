@@ -56,14 +56,8 @@ int main(int argc, char * argv[]) {
             fread(word_buf, 1, len, input);
             // Determine if there are any alphabetic characters in the word
             s8 valid = 0;
-            for (u32 j = 0; j < len; j++) {
-                if (isalpha(word_buf[j]))
-                    { valid = 1; break; }
-            }
-            if(!valid) {
-                word = -1;
-                continue;
-            }
+            Fi(len, If (isalpha(word_buf[i]), valid = 1; break))
+            If (!valid, word = -1; continue)
             word_buf[len] = '\0';
             // Is the word in the dictionary?
             Fi(vector_size(d), If (transform_and_check(d[i], word_buf), word = -1; break))
