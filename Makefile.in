@@ -104,7 +104,8 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_yaspell_OBJECTS = yaspell-yaspell.$(OBJEXT) yaspell-dict.$(OBJEXT) \
-	yaspell-email.$(OBJEXT) yaspell-transform.$(OBJEXT)
+	yaspell-email.$(OBJEXT) yaspell-transform.$(OBJEXT) \
+	yaspell-shim.$(OBJEXT)
 yaspell_OBJECTS = $(am_yaspell_OBJECTS)
 yaspell_LDADD = $(LDADD)
 yaspell_LINK = $(CCLD) $(yaspell_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) \
@@ -125,7 +126,8 @@ DEFAULT_INCLUDES = -I.@am__isrc@
 depcomp = $(SHELL) $(top_srcdir)/build-aux/depcomp
 am__maybe_remake_depfiles = depfiles
 am__depfiles_remade = ./$(DEPDIR)/yaspell-dict.Po \
-	./$(DEPDIR)/yaspell-email.Po ./$(DEPDIR)/yaspell-transform.Po \
+	./$(DEPDIR)/yaspell-email.Po ./$(DEPDIR)/yaspell-shim.Po \
+	./$(DEPDIR)/yaspell-transform.Po \
 	./$(DEPDIR)/yaspell-yaspell.Po
 am__mv = mv -f
 AM_V_lt = $(am__v_lt_@AM_V@)
@@ -285,7 +287,7 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 ACLOCAL_AMFLAGS = -I build-aux
 yaspell_CFLAGS = $(AM_CFLAGS)
-yaspell_SOURCES = yaspell.c dict.c email.c transform.c
+yaspell_SOURCES = yaspell.c dict.c email.c transform.c shim.c
 all: all-am
 
 .SUFFIXES:
@@ -378,6 +380,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yaspell-dict.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yaspell-email.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yaspell-shim.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yaspell-transform.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/yaspell-yaspell.Po@am__quote@ # am--include-marker
 
@@ -458,6 +461,20 @@ yaspell-transform.obj: transform.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='transform.c' object='yaspell-transform.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yaspell_CFLAGS) $(CFLAGS) -c -o yaspell-transform.obj `if test -f 'transform.c'; then $(CYGPATH_W) 'transform.c'; else $(CYGPATH_W) '$(srcdir)/transform.c'; fi`
+
+yaspell-shim.o: shim.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yaspell_CFLAGS) $(CFLAGS) -MT yaspell-shim.o -MD -MP -MF $(DEPDIR)/yaspell-shim.Tpo -c -o yaspell-shim.o `test -f 'shim.c' || echo '$(srcdir)/'`shim.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/yaspell-shim.Tpo $(DEPDIR)/yaspell-shim.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='shim.c' object='yaspell-shim.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yaspell_CFLAGS) $(CFLAGS) -c -o yaspell-shim.o `test -f 'shim.c' || echo '$(srcdir)/'`shim.c
+
+yaspell-shim.obj: shim.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yaspell_CFLAGS) $(CFLAGS) -MT yaspell-shim.obj -MD -MP -MF $(DEPDIR)/yaspell-shim.Tpo -c -o yaspell-shim.obj `if test -f 'shim.c'; then $(CYGPATH_W) 'shim.c'; else $(CYGPATH_W) '$(srcdir)/shim.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/yaspell-shim.Tpo $(DEPDIR)/yaspell-shim.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='shim.c' object='yaspell-shim.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(yaspell_CFLAGS) $(CFLAGS) -c -o yaspell-shim.obj `if test -f 'shim.c'; then $(CYGPATH_W) 'shim.c'; else $(CYGPATH_W) '$(srcdir)/shim.c'; fi`
 
 ID: $(am__tagged_files)
 	$(am__define_uniq_tagged_files); mkid -fID $$unique
@@ -734,6 +751,7 @@ distclean: distclean-am
 	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
 		-rm -f ./$(DEPDIR)/yaspell-dict.Po
 	-rm -f ./$(DEPDIR)/yaspell-email.Po
+	-rm -f ./$(DEPDIR)/yaspell-shim.Po
 	-rm -f ./$(DEPDIR)/yaspell-transform.Po
 	-rm -f ./$(DEPDIR)/yaspell-yaspell.Po
 	-rm -f Makefile
@@ -785,6 +803,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -rf $(top_srcdir)/autom4te.cache
 		-rm -f ./$(DEPDIR)/yaspell-dict.Po
 	-rm -f ./$(DEPDIR)/yaspell-email.Po
+	-rm -f ./$(DEPDIR)/yaspell-shim.Po
 	-rm -f ./$(DEPDIR)/yaspell-transform.Po
 	-rm -f ./$(DEPDIR)/yaspell-yaspell.Po
 	-rm -f Makefile
