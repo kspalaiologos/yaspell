@@ -845,6 +845,10 @@ uninstall-am: uninstall-binPROGRAMS
 .PRECIOUS: Makefile
 
 
+.PHONY: test
+test: yaspell
+	./yaspell test/sherlock_holmes.txt yaspell-dict/british-english yaspell-dict/doyle-english | wc -c | grep '^0$$'
+
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -41,14 +41,14 @@ dict * dict_create(FILE * source) {
     Fi(size,
         u32 wlen = strlen(d->string + i), hash = fnv1a_bytes(d->string + i, wlen, fnv1a_seed);
         while (d->ht[hash % (d->words + d->words / 8)]) hash++;
-        d->ht[hash % (d->words + d->words / 8)] = i; i += wlen)
+        d->ht[hash % (d->words + d->words / 8)] = i + 1; i += wlen)
     return d;
 }
 
 s8 dict_find(dict * d, u8 * word) {
     for (u32 hash = fnv1a_bytes(word, strlen(word), fnv1a_seed), i, j;
         d->ht[hash % (d->words + d->words / 8)]; hash++) {
-        for (i = d->ht[hash % (d->words + d->words / 8)], j = 0;
+        for (i = d->ht[hash % (d->words + d->words / 8)] - 1, j = 0;
              d->string[i] && d->string[i] == word[j]; i++, j++);
         If(!d->string[i] && !word[j], return 1)
     }

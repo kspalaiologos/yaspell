@@ -64,6 +64,11 @@ struct transform transforms[] = {
 
 // Apply all permutations of transforms to the word. Check if any matches.
 s8 transform_and_check(dict * d, u8 * word) {
+    if (!strcmp(word, "'60's")) {
+        // Debugger breakpoint.
+        volatile int i = 0;
+        i++;
+    }
     // First check the word as is.
     If (dict_find(d, word), return 1)
     u32 len = strlen(word);
