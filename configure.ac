@@ -1,5 +1,5 @@
 AC_PREREQ([2.68])
-AC_INIT([yaspell], [1.0.0], [https://github.com/kspalaiologos/yaspell])
+AC_INIT([yaspell], [1.0.0], [https://github.com/iczelia/yaspell])
 AC_CONFIG_AUX_DIR([build-aux])
 AM_INIT_AUTOMAKE([foreign subdir-objects tar-pax color-tests])
 AM_SILENT_RULES([yes])
